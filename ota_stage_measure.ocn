@@ -1,0 +1,54 @@
+;;; INPUT STAGE
+ocnxlOutputSignal( "/vin2" ?plot t ?save t)
+ocnxlOutputSignal( "/vin1" ?plot t ?save t)
+ocnxlOutputExpr( "(ymax(VT(\"/vin2\")) - ymin(VT(\"/vin2\")))" ?name "VIN_PP" ?plot t ?save t ?evalType 'point)
+ocnxlOutputExpr( "(VT(\"/vin2\") - average(VT(\"/vin2\")))" ?name "VIN_NoDC" ?plot t ?save t ?evalType 'point)
+ocnxlOutputExpr( "cross(VIN_NoDC 0 5 \"rising\" nil nil nil)" ?name "VIN_Cros" ?plot t ?save t ?evalType 'point)
+
+ocnxlOutputSignal( "/vg_bias" ?name "bias point voltage" ?plot t ?save t)
+ocnxlOutputSignal( "/ota/IREF_OUT" ?plot t ?save t)
+ocnxlOutputSignal( "/mirror_headroom" ?plot t ?save t)
+
+;;; FIRST STAGE DIFF AMP GAIN GM4(r0 4//r0 1)
+ocnxlOutputExpr( "(1 / OP(\"/M4\" \"gds\"))" ?name "M4_r0" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "(1 / OP(\"/M1\" \"gds\"))" ?name "M1_r0" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "OP(\"/ota/M4\" \"gm\")" ?name "gm4" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "gm4 * 1/(1/M4_r0 + 1/M1_r0)" ?name "Expected Gain" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "(OP(\"/ota/M4\" \"gm\") / OP(\"/ota/M4\" \"id\"))" ?name "gm4/ID" ?plot t ?evalType 'point)
+
+ocnxlOutputExpr( "(ymax(VT(\"/ota/av1\")) - ymin(VT(\"/ota/av1\")))/(VIN_PP)" ?name "Actual Gain" ?plot t ?evalType 'point)
+
+
+;;; SECOND STAGE INVERSION
+ocnxlOutputExpr( "OP(\"/ota/M5\" \"gm\")" ?name "gm5" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "OP(\"/ota/M6\" \"gm\")" ?name "gm6" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "gm6/gm5" ?name "Expected Gain" ?plot t ?evalType 'point)
+
+ocnxlOutputExpr( "(ymax(VT(\"/ota/av2\")) - ymin(VT(\"/ota/av2\")))/(ymax(VT(\"/ota/av1\")) - ymin(VT(\"/ota/av1\")))" ?name "Actual Gain" ?plot t ?evalType 'point)
+
+;;; THIRD STATE MAIN GAIN 
+ocnxlOutputExpr( "OP(\"/ota/M7\" \"gm\")" ?name "gm7" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "(1 / OP(\"/M7\" \"gds\"))" ?name "M7_r0" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "(1 / OP(\"/M2\" \"gds\"))" ?name "M2_r0" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "gm7 * 1/(1/M7_r0 + 1/M2_r0)" ?name "Expected Gain" ?plot t ?evalType 'point)
+
+ocnxlOutputExpr( "(ymax(VT(\"/ota/av3\")) - ymin(VT(\"/ota/av3\")))/(ymax(VT(\"/ota/av1\")) - ymin(VT(\"/ota/av1\")))" ?name "Actual Gain" ?plot t ?evalType 'point)
+
+
+;;; VOUT
+ocnxlOutputExpr( "(ymax(VT(\"/vout\")) - ymin(VT(\"/vout\")))" ?name "VOUT_PP" ?plot t ?save t ?evalType 'point)
+ocnxlOutputExpr( "(VT(\"/vout\") - average(VT(\"/vout\")))" ?name "VOUT_NoDC" ?plot t ?save t ?evalType 'point)
+ocnxlOutputExpr( "(VT(\"/ota/av1\") - average(VT(\"/ota/av1\")))" ?name "av1_NoDC" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "(VT(\"/ota/av2\") - average(VT(\"/ota/av2\")))" ?name "av2_NoDC" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "(VT(\"/ota/av3\") - average(VT(\"/ota/av3\")))" ?name "av2_NoDC" ?plot t ?evalType 'point)
+
+ocnxlOutputExpr( "(VOUT_PP / VIN_PP)" ?name "Av" ?plot t ?evalType 'point)
+
+
+ocnxlOutputExpr( "cross(VOUT_NoDC 0 5 \"rising\" nil nil nil)" ?name "VOUT_Cros" ?plot t ?save t ?evalType 'point)
+ocnxlOutputExpr( "(VOUT_Cros - VIN_Cros)" ?name "cross_delta" ?plot t ?save t ?evalType 'point)
+ocnxlOutputExpr( "(360 - (cross_delta * VAR(\"Fin\") * 360))" ?name "phase shift" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "(OP(\"/ota/M7\" \"gm\") / OP(\"/ota/M7\" \"id\"))" ?name "gm2,7" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "dB20(VF(\"/vout\"))" ?name "VOUT_Mag" ?plot t ?evalType 'point)
+ocnxlOutputExpr( "phase(VF(\"/vout\"))" ?name "VOUT_Phase" ?plot t ?evalType 'point)
+
