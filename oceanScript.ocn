@@ -32,6 +32,8 @@ option(	'pzSeverity  "None"
 	'dcSeverity  "None" 
 	'tranSeverity  "None" 
 )
+
+; OH BOY I <3 CODE
 saveOption( ?infoOptions list(list("modelParameter" "models" "rawfile" "" "" "" t) list("element" "inst" "rawfile" "" "" "" t) list("outputParameter" "output" "rawfile" "" "" "" t) list("designParamVals" "parameters" "rawfile" "" "" "" t) list("primitives" "primitives" "rawfile" "" "" "" t) list("subckts" "subckts" "rawfile" "" "" "" t) list("asserts" "assert" "rawfile" "" "" "" nil) list("extremeinfo" "all" "logfile" "" "yes" "" nil) list("allcap" "allcap" "file" "" "" "" nil) list("simStatistics" "simstat" "rawfile" "" "" "" nil) list("<Click_To_Add>" "none" "rawfile" "" "" "" nil) ) )
 save( 'v "/vout" "/net2" "/vin2" "/vin1" "/ota/IREF_OUT" "/ota/net2" "/ota/av1" "/ota/av2" "/ota/av3" )
 temp( 27 ) 
@@ -72,7 +74,8 @@ ocnxlModelGroup( "/classes/ee620/tech/cds/gpdk045/GPDK045_v5/TECH/GPDK045/gpdk04
    )
 )
 
-;====================== Corners setup ==========================================
+;====================== Corners setup ========================================== 
+; add from other labs
 ocnxlCorner( "Typical"
    '(
       ("variable" "temperature" "27")
