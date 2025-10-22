@@ -42,7 +42,7 @@ ocnxlOutputExpr( "(ymax(VT(\"/vin2\")) - ymin(VT(\"/vin2\")))" ?name "VIN_PP" ?p
 ocnxlOutputExpr( "(VT(\"/vin2\") - average(VT(\"/vin2\")))" ?name "VIN_NoDC" ?plot t ?save t ?evalType 'point)
 ocnxlOutputExpr( "cross(VIN_NoDC 0 5 \"rising\" nil nil nil)" ?name "VIN_Cros" ?plot t ?save t ?evalType 'point)
 
-ocnxlOutputSignal( "/vg_bias" ?name "bias point voltage" ?plot t ?save t)
+ocnxlOutputSignal( "/vg_bias" ?plot t ?save t)
 ocnxlOutputSignal( "/ota/IREF_OUT" ?plot t ?save t)
 ocnxlOutputSignal( "/mirror_headroom" ?plot t ?save t)
 
