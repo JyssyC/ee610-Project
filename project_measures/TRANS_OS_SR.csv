@@ -1,10 +1,22 @@
-Name,Type,Output,EvalType,Plot,Save,Units,Spec
-,net,/vcm,point,t,t,,
-,net,/vin,point,t,,,
-,net,/vout,point,t,,,
-,terminal,/I_AMP/VDD,point,t,,,
-,terminal,/CL/PLUS,point,t,,,
-,terminal,/R0/PLUS,point,t,,,
-TRANS_OS_MINUS,expr,value(VT("/vout")),point,t,,V,< 5m
-TRANS_OS_PLUS,expr,(VAR("VDD") - value(VT("/vout"))),point,t,,V,< 5m
-TRANS_VOUT_DERIV,expr,deriv(VT("/vout")),point,t,,,
+Name,                           Type,     Output,                                                       EvalType, Plot, Save, Units, Spec
+,                               net,      /vcm,                                                         point,    t,    t,    ,
+,                               net,      /vin,                                                         point,    t,    ,     ,
+,                               net,      /vout,                                                        point,    t,    ,     ,
+,                               terminal, /I_AMP/VDD,                                                   point,    t,    ,     ,
+,                               terminal, /CL/PLUS,                                                     point,    t,    ,     ,
+,                               terminal, /R0/PLUS,                                                     point,    t,    ,     ,
+TRANS_OS_MINUS,                 expr,     value(VT("/vout")),                                           point,    t,    ,     V,     < 5m
+TRANS_OS_PLUS,                  expr,     (VAR("VDD") - value(VT("/vout"))),                            point,    t,    ,     V,     < 5m
+TRANS_VOUT_DERIV,               expr,     deriv(VT("/vout")),                                           point,    t,    ,     ,
+TRANS_VOUT_DERIV_LOW,           expr,     clip(TRANS_VOUT_DERIV 4.00 3e-05 5e-05),                      point,    t,    ,     ,
+TRANS_VOUT_DERIV_HIGH,          expr,     clip(TRANS_VOUT_DERIV 5.00 3e-05 6e-05),                      point,    t,    ,     ,
+
+TRANS_VOUT_DERIV_LOW_t1,        expr,     cross(TRANS_VOUT_DERIV_LOW -1000000 1 "falling" nil nil nil), point,    t,    ,     ,
+TRANS_VOUT_DERIV_LOW_t2,        expr,     cross(TRANS_VOUT_DERIV_LOW -1000000 1 "rising" nil nil nil),  point,    t,    ,     ,
+TRANS_VOUT_DERIV_LOW_t1_to_t2,  expr,     clip(TRANS_VOUT_DERIV_LOW_t1 TRANS_VOUT_DERIV_LOW_t2),        point,    t,    ,     ,
+TRANS_SR_MINUS,                 expr,     -average(TRANS_VOUT_DERIV_LOW_t1_to_t2/1000000),              point,    t,    ,     ,      > 5
+
+TRANS_VOUT_DERIV_HIGH_t1,       expr,     cross(TRANS_VOUT_DERIV_HIGH 1000000 1 "rising" nil nil nil),  point,    t,    ,     ,
+TRANS_VOUT_DERIV_HIGH_t2,       expr,     cross(TRANS_VOUT_DERIV_HIGH 1000000 1 "falling" nil nil nil), point,    t,    ,     ,
+TRANS_VOUT_DERIV_HIGH_t1_to_t2, expr,     clip(TRANS_VOUT_DERIV_HIGH_t1 TRANS_VOUT_DERIV_HIGH_t2),      point,    t,    ,     ,
+TRANS_SR_PLUS,                  expr,     average(TRANS_VOUT_DERIV_HIGH_t1_to_t2/1000000),              point,    t,    ,     ,      > 5
