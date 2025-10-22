@@ -1,0 +1,1 @@
+artistResMgrCalcExprSetup("true" "plot" "E5" "(ymax(VT("/ota/av3")) - ymin(VT("/ota/av3")))")
