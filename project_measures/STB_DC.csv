@@ -1,0 +1,11 @@
+Name,Type,Output,EvalType,Plot,Save,Units,Spec
+STB_BodeMagnitude,expr,db(mag(getData("loopGain" ?result "stb"))),point,t,,,
+STB_BodePhase,expr,phaseDegUnwrapped(getData("loopGain" ?result "stb")),point,t,,,
+STB_AOL,expr,value(STB_BodeMagnitude 0.001),point,t,,dB,> 60
+STB_PhaseMargin,expr,getData("phaseMargin" ?result "stb_margin"),point,t,,Deg,> 50
+STB_GainMargin,expr,getData("gainMargin" ?result "stb_margin"),point,t,,dB,> 8
+STB_UnityGainFreq,expr,getData("phaseMarginFreq" ?result "stb_margin"),point,t,,Hz,> 10M
+STB_GainMarginFreq,expr,getData("gainMarginFreq" ?result "stb_margin"),point,t,,Hz,
+,terminal,/I_AMP/VDD,point,t,t,,
+DC_IVDD,expr,IDC("/I_AMP/VDD"),point,t,,A,
+DC_VDDpower,expr,(DC_IVDD * VDC("/VDD")),point,t,,,

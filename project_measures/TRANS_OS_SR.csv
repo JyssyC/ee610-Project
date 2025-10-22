@@ -1,0 +1,10 @@
+Name,Type,Output,EvalType,Plot,Save,Units,Spec
+,net,/vcm,point,t,t,,
+,net,/vin,point,t,,,
+,net,/vout,point,t,,,
+,terminal,/I_AMP/VDD,point,t,,,
+,terminal,/CL/PLUS,point,t,,,
+,terminal,/R0/PLUS,point,t,,,
+TRANS_OS_MINUS,expr,value(VT("/vout")),point,t,,V,< 5m
+TRANS_OS_PLUS,expr,(VAR("VDD") - value(VT("/vout"))),point,t,,V,< 5m
+TRANS_VOUT_DERIV,expr,deriv(VT("/vout")),point,t,,,
