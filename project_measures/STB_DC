@@ -1,8 +1,0 @@
-artistResMgrCalcExprSetup("true" "plot" "STB_BodeMagnitude" "db(mag( getData("loopGain" ?result "stb") ))")
-artistResMgrCalcExprSetup("true" "plot" "STB_BodePhase" "phaseDegUnwrapped(getData("loopGain" ?result "stb"))")
-artistResMgrCalcExprSetup("true" "plot" "STB_AOL" "value(STB_BodeMagnitude 0.001)")
-artistResMgrCalcExprSetup("true" "plot" "STB_PhaseMargin" "getData("phaseMargin" ?result "stb_margin")")
-artistResMgrCalcExprSetup("true" "plot" "STB_GainMargin" "getData("gainMargin" ?result "stb_margin")")
-artistResMgrCalcExprSetup("true" "plot" "STB_UnityGainFreq" "getData("phaseMarginFreq" ?result "stb_margin")")
-artistResMgrCalcExprSetup("true" "plot" "STB_GainMarginFreq" "getData("gainMarginFreq" ?result "stb_margin")")
-artistResMgrCalcExprSetup("true" "plot" "DC_IVDD" "IDC("/I_AMP/VDD")")
