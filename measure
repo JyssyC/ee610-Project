@@ -1,4 +1,4 @@
-atistResMgrCalcExprSetup("true" "plot" "VIN_PP" "ymax(VT("/vin2") - ymin(VT("/vin2"))")
+artistResMgrCalcExprSetup("true" "plot" "VIN_PP" "ymax(VT("/vin2") - ymin(VT("/vin2"))")
 artistResMgrCalcExprSetup("true" "plot" "VIN_NoDC" "(VT("/vin2") - average(VT("/vin2")))" )
 artistResMgrCalcExprSetup("true" "plot" "VIN_Cros" "cross(VIN_NoDC 0 5 "rising" nil nil nil)" )
 
