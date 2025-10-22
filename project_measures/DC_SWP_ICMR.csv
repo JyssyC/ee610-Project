@@ -1,0 +1,7 @@
+Name,            Type,     Output,                                                         EvalType, Plot, Save, Units, Spec
+,                terminal, /vin,                                                           point,    t,    t,    ,
+,                terminal, /vout,                                                          point,    t,    t,    ,
+ICMR_PERC_ERROR, expr,     abs( (VS("/vin") - VS("/vout"))/VS("/vin") *100),               point,    t,    ,     %,
+ICMR_MINUS,      expr,     cross(ICMR_PERC_ERROR "1" 1 "falling" nil nil nil),             point,    t,    ,     V,     < 0.2
+ICMR_PLUS,       expr,     VDC("VDD") - cross(ICMR_PERC_ERROR "1" 1 "rising" nil nil nil), point,    t,    ,     V,     < 0.2
+

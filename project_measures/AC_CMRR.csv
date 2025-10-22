@@ -1,0 +1,7 @@
+Name,       Type,     Output,                  EvalType, Plot, Save, Units, Spec
+,           terminal, /vout_diff,              point,    t,    t,    ,
+,           terminal, /vout_cm,                point,    t,    t,    ,
+AV_DIFF_DB, expr,     dB20(VDF("/vout_diff")), point,    t,    ,     ,
+AV_CM_DB,   expr,     dB20(VDF("/vout_cm")),   point,    t,    ,     ,
+CMRR,       expr,     AV_DIFF_DB - AV_CM_DB,   point,    t,    ,     ,
+CMRR_60Hz,  expr,     value(CMRR 60),          point,    t,    ,     ,      > 50
