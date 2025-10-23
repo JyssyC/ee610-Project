@@ -22,8 +22,8 @@ Actual Gain av2,   expr,     ((ymax(VT("/ota/av2")) - ymin(VT("/ota/av2"))) / (y
                                                                                                                                                
 gm7,               expr,     OP("/ota/M7" "gm"),                                                                              point,    t,    ,
 gm7/ID,            expr,     (OP("/ota/M7" "gm") / OP("/ota/M7" "id")),                                                       point,    t,    ,
-Vov7,              expr,     (OP("/ota/M7" "vth") - OP("/ota/M7" "vgs")),                                                     point,    t,    ,
-Vov2,              expr,     (OP("/ota/M2" "vth") - OP("/ota/M2" "vgs")),                                                     point,    t,    ,
+VdsSat7,           expr,     OP( "/ota/M7" "vds" )  - (OP("/ota/M7" "vth") - OP("/ota/M7" "vgs")),                            point,    t,    ,
+VdsSat2,           expr,     OP( "/ota/M2" "vds" )  - (OP("/ota/M2" "vth") - OP("/ota/M2" "vgs")),                            point,    t,    ,
 M7_r0,             expr,     (1 / OP("/ota/M7" "gds")),                                                                       point,    t,    ,
 M2_r0,             expr,     (1 / OP("/ota/M2" "gds")),                                                                       point,    t,    ,
 Expected Gain av3, expr,     ((gm7 * 1) / ((1 / M7_r0) + (1 / M2_r0))),                                                       point,    t,    ,
