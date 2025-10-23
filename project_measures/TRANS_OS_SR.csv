@@ -8,8 +8,8 @@ Name,                           Type,     Output,                               
 TRANS_OS_MINUS,                 expr,     value(VT("/vout") 4.99e-05),                                  point,    t,    ,     V,     < 5m
 TRANS_OS_PLUS,                  expr,     (VAR("VDD") - value(VT("/vout") 5.99e-05)),                   point,    t,    ,     V,     < 5m
 TRANS_VOUT_DERIV,               expr,     deriv(VT("/vout")),                                           point,    t,    ,     ,
-TRANS_VOUT_DERIV_LOW,           expr,     clip(TRANS_VOUT_DERIV 4.00 3e-05 5e-05),                      point,    t,    ,     ,
-TRANS_VOUT_DERIV_HIGH,          expr,     clip(TRANS_VOUT_DERIV 5.00 3e-05 6e-05),                      point,    t,    ,     ,
+TRANS_VOUT_DERIV_LOW,           expr,     clip(TRANS_VOUT_DERIV 4.003e-05 5e-05),                      point,    t,    ,     ,
+TRANS_VOUT_DERIV_HIGH,          expr,     clip(TRANS_VOUT_DERIV 5.003e-05 6e-05),                      point,    t,    ,     ,
 
 TRANS_VOUT_DERIV_LOW_t1,        expr,     cross(TRANS_VOUT_DERIV_LOW -1000000 1 "falling" nil nil nil), point,    t,    ,     ,
 TRANS_VOUT_DERIV_LOW_t2,        expr,     cross(TRANS_VOUT_DERIV_LOW -1000000 1 "rising" nil nil nil),  point,    t,    ,     ,
