@@ -1,0 +1,7 @@
+Name,                Type,     Output,                                                                                     EvalType, Plot, Save, Units, Spec
+,                    terminal, /vin,                                                                                       point,    t,    t,    ,
+,                    terminal, /vout,                                                                                      point,    t,    t,    ,
+TRANS_VOUT_SPECTRUM, expr,     db20(dft(VT("/vout") 0.01 0.02 1024 "Rectangular" 0 0 1)),                                  point,    t,    ,     V,
+TRANS_VOUT_THD_PERC, expr,     spectrumMeasurement(VT("/vout") t 0.01 0.02 1024 100 10000 1 "Rectangular" 0 0 20 "thd"),   point,    t,    ,     %,
+TRANS_VOUT_THD_DB,   expr,     spectrumMeasurement(VT("/vout") t 0.01 0.02 1024 100 10000 1 "Rectangular" 0 0 20 "thddb"), point,    t,    ,     dB,
+

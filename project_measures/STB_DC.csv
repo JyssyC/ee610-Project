@@ -11,3 +11,4 @@ DC_IVDD,            expr,     IDC("/I_AMP/VDD"),                                
 DC_VDDpower,        expr,     (DC_IVDD * VDC("/VDD")),                              point,    t,    ,     W,
 PSRR,               expr,     -dB20(VF("/vout")),                                   point,    t,    ,     ,
 PSRR_60Hz,          expr,     value(PSRR 60),                                       point,    t,    ,     dB,    > 60
+VIN_DIFF,           expr,     VDC("/vcm") - VDC("/vin_fb"),                         point,    t,    ,     V,
